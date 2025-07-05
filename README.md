@@ -5,7 +5,7 @@ The dataset used is simulated, making it a useful sandbox for experimenting with
 The workflow covers the full process: exploring and analyzing the data, training models, comparing their performance, and building an interactive Streamlit web app for quick predictions. It’s intended as a practical example of applying ML to a real-world-inspired engineering problem.
 
 
-The dataset was obtained from the UCI Machine Learning Repository. It contains simulated data of various building designs and their respective heating and cooling energy requirements. Each row represents a building design with a combination of architectural features.Features
+The dataset was obtained from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/energy+efficiency). It contains simulated data of various building designs and their respective heating and cooling energy requirements. Each row represents a building design with a combination of architectural features.Features
 
 The dataset includes eight input features:
 
@@ -43,8 +43,9 @@ Wall Area and Glazing Area showed positive correlations with energy loads, as la
 
 To better visualize these relationships, scatter plots were created for key features against both Heating Load and Cooling Load.
 
-![image](https://github.com/user-attachments/assets/b98b1ef2-043c-4ecd-b2c0-ca5262193b93)  ![image](https://github.com/user-attachments/assets/e37503e7-84f4-4852-82ef-6b868f192532) ![image](https://github.com/user-attachments/assets/e516d887-3b8d-4ae5-a8e7-2e3cf0ae691c)
-![image](https://github.com/user-attachments/assets/08d9461c-4426-4227-bb47-0a14eaf66695) ![image](https://github.com/user-attachments/assets/83b12d0c-b2ff-475d-8cc4-b891f03059a2) ![image](https://github.com/user-attachments/assets/db33a019-ba6c-4f6d-9e27-90f5b92b34bd)
+![image](https://github.com/user-attachments/assets/cf9f7003-7816-4451-8c8c-78954bec35cf)   ![image](https://github.com/user-attachments/assets/811bb3c3-8384-4738-8e72-f3f7cc05a201)
+
+
 
 * Relative Compactness: More compact structures lose less heat due to reduced surface area exposure.
 
