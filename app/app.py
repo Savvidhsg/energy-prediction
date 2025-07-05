@@ -1,8 +1,13 @@
 import streamlit as st
 import joblib
 
-heating_model = joblib.load("heating_model.pkl")
-cooling_model = joblib.load("cooling_model.pkl")
+model_folder = os.path.join(os.path.dirname(__file__), "models")
+heating_model_path = os.path.join(model_folder, "heating_model.pkl")
+cooling_model_path = os.path.join(model_folder, "cooling_model.pkl")
+
+heating_model = joblib.load(heating_model_path)
+cooling_model = joblib.load(cooling_model_path)
+
 
 st.title(" Building Energy Load Predictor")
 st.markdown("""
