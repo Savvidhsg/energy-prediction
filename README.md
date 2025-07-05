@@ -46,13 +46,13 @@ To better visualize these relationships, scatter plots were created for key feat
 ![image](https://github.com/user-attachments/assets/b98b1ef2-043c-4ecd-b2c0-ca5262193b93)  ![image](https://github.com/user-attachments/assets/e37503e7-84f4-4852-82ef-6b868f192532) ![image](https://github.com/user-attachments/assets/e516d887-3b8d-4ae5-a8e7-2e3cf0ae691c)
 ![image](https://github.com/user-attachments/assets/08d9461c-4426-4227-bb47-0a14eaf66695) ![image](https://github.com/user-attachments/assets/83b12d0c-b2ff-475d-8cc4-b891f03059a2) ![image](https://github.com/user-attachments/assets/db33a019-ba6c-4f6d-9e27-90f5b92b34bd)
 
-Relative Compactness: More compact structures lose less heat due to reduced surface area exposure.
+* Relative Compactness: More compact structures lose less heat due to reduced surface area exposure.
 
-Wall and Roof Areas: Larger areas are prone to higher thermal losses or gains.
+* Wall and Roof Areas: Larger areas are prone to higher thermal losses or gains.
 
-Glazing Area: While windows improve natural lighting, excessive glazing can lead to significant heat loss in winter and overheating in summer.
+* Glazing Area: While windows improve natural lighting, excessive glazing can lead to significant heat loss in winter and overheating in summer.
 
-Orientation: Determines sun exposure and impacts passive heating/cooling potential.
+* Orientation: Determines sun exposure and impacts passive heating/cooling potential.
 
 The findings in this dataset align with real-life architectural principles, reinforcing the idea that thoughtful design choices can dramatically influence a building’s energy efficiency.
 
@@ -62,17 +62,17 @@ The dataset was split into features (X) and target variables (y). Both Heating L
 
 The data was then split into training and testing sets using an 80-20 ratio. Standardization was applied where needed to ensure fair treatment of features, especially for models sensitive to scale.
 
-Model Selection
+# Model Selection
 
 Two algorithms were tested to evaluate predictive performance:
 
-Linear Regression: A simple baseline model to capture linear relationships.
+* Linear Regression: A simple baseline model to capture linear relationships.
 
-Random Forest Regressor: An ensemble tree-based method capable of modeling complex, non-linear relationships.
+* Random Forest Regressor: An ensemble tree-based method capable of modeling complex, non-linear relationships.
 
 Both models were trained on the training set and evaluated using metrics such as R² score and Mean Squared Error (MSE) on the test set.
 
-Linear Regression Results
+# Linear Regression Results
 
 R² Score: 0.91
 
@@ -81,7 +81,7 @@ Mean Squared Error: 9.15
 The predictions from Linear Regression showed reasonable performance but missed some of the more intricate relationships between features and energy loads.
 ![image](https://github.com/user-attachments/assets/56ac2ab4-2a25-4287-ac40-b9997fef75e2)
 
-Random Forest Results
+# Random Forest Results
 
 R² Score: 0.99
 
@@ -107,9 +107,9 @@ Random Forest once again demonstrated superior performance, accurately predictin
 
 In real-world building design, the choice of materials plays a pivotal role in energy efficiency. Materials determine the rate at which heat flows through the building envelope, a property quantified by thermal conductivity (k). This thermal conductivity, combined with thickness and assembly details, contributes to the overall U-value (thermal transmittance) of walls, roofs, and glazing.
 
-Thermal Conductivity (k): Indicates how well a material conducts heat. Low-k materials like insulation slow heat transfer, while high-k materials like concrete conduct heat more readily.
+* Thermal Conductivity (k): Indicates how well a material conducts heat. Low-k materials like insulation slow heat transfer, while high-k materials like concrete conduct heat more readily.
 
-U-Value (W/m²K): Represents the rate of heat transfer per unit area and temperature difference. Lower U-values indicate better insulation and lower heat loss.
+* U-Value (W/m²K): Represents the rate of heat transfer per unit area and temperature difference. Lower U-values indicate better insulation and lower heat loss.
 
 To bring this physical concept into the model, additional parameters were introduced to represent different material categories for walls, roofs, and glazing. Each category was assigned representative thermal conductivity values to simulate their effect on building energy performance.
 
@@ -124,7 +124,7 @@ Users can experiment with different combinations of features and observe how des
 To provide additional context, the app includes a simple cost estimation module. Users can input the price per kWh for their region, and the app calculates the estimated annual cost of heating and cooling based on the predicted energy loads. While this feature is highly simplified, it offers a practical glimpse into how energy-efficient design decisions can translate into real financial savings over time.
 
 
-HOW TO RUN THE APP
+# HOW TO RUN THE APP
 
 Click below to open the app directly in your browser:
 
