@@ -2,17 +2,14 @@ import streamlit as st
 import joblib
 import os
 
-# Path to the models folder
 model_folder = os.path.join(os.path.dirname(__file__), "..", "models")
 
-# Load retrained models from the models folder
 heating_model_path = os.path.join(model_folder, "heating_model_with_realistic_materials.pkl")
 cooling_model_path = os.path.join(model_folder, "cooling_model_with_realistic_materials.pkl")
 
 heating_model = joblib.load(heating_model_path)
 cooling_model = joblib.load(cooling_model_path)
 
-# App title
 st.title("Building Energy Load Predictor")
 st.markdown("""
 This tool predicts the **Heating Load** and **Cooling Load** of a building 
@@ -22,7 +19,6 @@ It also estimates total annual energy use (kWh) and cost (€) based on your bui
 and local energy price.
 """)
 
-# Geometry Parameters
 st.header("Geometry Parameters")
 relative_compactness = st.slider("Relative Compactness", 0.5, 1.0, 0.8, step=0.01)
 surface_area = st.number_input("Surface Area (m²)", value=700.0, step=10.0)
@@ -30,12 +26,10 @@ wall_area = st.number_input("Wall Area (m²)", value=300.0, step=10.0)
 roof_area = st.number_input("Roof Area (m²)", value=150.0, step=5.0)
 overall_height = st.number_input("Overall Height (m)", value=7.0, step=0.1)
 
-# Orientation
 orientation_dict = {"North": 2, "East": 3, "South": 4, "West": 5}
 orientation_name = st.selectbox("Building Orientation", list(orientation_dict.keys()))
 orientation = orientation_dict[orientation_name]
 
-# Window Parameters
 st.header("Window Parameters")
 glazing_area = st.slider("Glazing Area Ratio", 0.0, 0.4, 0.2, step=0.01)
 glazing_dist_dict = {
@@ -49,7 +43,6 @@ glazing_dist_dict = {
 glazing_dist_name = st.selectbox("Glazing Area Distribution", list(glazing_dist_dict.keys()))
 glazing_area_dist = glazing_dist_dict[glazing_dist_name]
 
-# Material Parameters
 st.header("Material Choices")
 wall_type_dict = {
     "Brick, no insulation": 0,
@@ -75,32 +68,30 @@ wall_type = wall_type_dict[wall_type_name]
 roof_type = roof_type_dict[roof_type_name]
 window_type = window_type_dict[window_type_name]
 
-# Energy price
 st.header("Energy Price")
 energy_price = st.number_input("Energy Price (€/kWh)", value=0.20, step=0.01)
 
-# Predict button
 if st.button("Predict Energy Loads & Costs"):
-    # Prepare input data
+    
     input_data = [[relative_compactness, surface_area, wall_area,
                    roof_area, overall_height, orientation,
                    glazing_area, glazing_area_dist,
                    wall_type, roof_type, window_type]]
 
-    # Predict Heating and Cooling Loads (kWh/m²/year)
+    
     heating_load_per_m2 = heating_model.predict(input_data)[0]
     cooling_load_per_m2 = cooling_model.predict(input_data)[0]
 
-    # Estimate total building energy use
-    floor_area = surface_area  # Approximation: assume floor area ≈ surface area
+   
+    floor_area = surface_area  
     total_heating_energy = heating_load_per_m2 * floor_area
     total_cooling_energy = cooling_load_per_m2 * floor_area
 
-    # Calculate annual costs
+    
     heating_cost = total_heating_energy * energy_price
     cooling_cost = total_cooling_energy * energy_price
 
-    # Display predictions
+    
     st.subheader("Predicted Energy Loads")
     st.write(f"**Heating Load (per m²):** {heating_load_per_m2:.2f} kWh/m²")
     st.write(f"**Cooling Load (per m²):** {cooling_load_per_m2:.2f} kWh/m²")
