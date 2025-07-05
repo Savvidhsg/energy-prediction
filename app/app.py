@@ -2,10 +2,12 @@ import streamlit as st
 import joblib
 import os
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-model_folder = os.path.join(current_dir, "..", "models")
+
+import sklearn
+sklearn.utils._joblib = joblib
 
 
+model_folder = os.path.join(os.path.dirname(__file__), "models")
 heating_model_path = os.path.join(model_folder, "heating_model.pkl")
 cooling_model_path = os.path.join(model_folder, "cooling_model.pkl")
 
@@ -14,97 +16,57 @@ heating_model = joblib.load(heating_model_path)
 cooling_model = joblib.load(cooling_model_path)
 
 
-st.title("Building Energy Load Predictor")
+st.title("🏠 Building Energy Load Predictor")
 st.markdown("""
-This tool predicts the **Heating Load** and **Cooling Load** of a building 
+This tool predicts the **Heating Load** and **Cooling Load** of a building
 based on geometry and material choices.
 
 It also estimates total annual energy use (kWh) and cost (€) based on your building size
 and local energy price.
 """)
 
-st.header("Geometry Parameters")
-relative_compactness = st.slider("Relative Compactness", 0.5, 1.0, 0.8, step=0.01)
-surface_area = st.number_input("Surface Area (m²)", value=700.0, step=10.0)
-wall_area = st.number_input("Wall Area (m²)", value=300.0, step=10.0)
-roof_area = st.number_input("Roof Area (m²)", value=150.0, step=5.0)
-overall_height = st.number_input("Overall Height (m)", value=7.0, step=0.1)
 
-orientation_dict = {"North": 2, "East": 3, "South": 4, "West": 5}
-orientation_name = st.selectbox("Building Orientation", list(orientation_dict.keys()))
-orientation = orientation_dict[orientation_name]
+st.header("📐 Geometry Parameters")
+relative_compactness = st.slider("Relative Compactness", 0.5, 1.0, 0.75)
+surface_area = st.slider("Surface Area (m²)", 400, 1000, 600)
+wall_area = st.slider("Wall Area (m²)", 200, 400, 300)
+roof_area = st.slider("Roof Area (m²)", 100, 300, 200)
+overall_height = st.slider("Overall Height (m)", 3.0, 10.0, 5.0)
+orientation = st.selectbox("Orientation", [2, 3, 4, 5])
+glazing_area = st.slider("Glazing Area (%)", 0.0, 0.4, 0.1)
+glazing_area_distribution = st.selectbox("Glazing Area Distribution", [0, 1, 2, 3, 4])
 
-st.header("Window Parameters")
-glazing_area = st.slider("Glazing Area Ratio", 0.0, 0.4, 0.2, step=0.01)
-glazing_dist_dict = {
-    "No glazing": 0,
-    "North wall only": 1,
-    "East wall only": 2,
-    "South wall only": 3,
-    "West wall only": 4,
-    "Uniform on all walls": 5
-}
-glazing_dist_name = st.selectbox("Glazing Area Distribution", list(glazing_dist_dict.keys()))
-glazing_area_dist = glazing_dist_dict[glazing_dist_name]
 
-st.header("Material Choices")
-wall_type_dict = {
-    "Brick, no insulation": 0,
-    "Brick, insulated": 1,
-    "High-performance wall": 2
-}
-roof_type_dict = {
-    "Concrete slab, no insulation": 0,
-    "Concrete slab, insulated": 1,
-    "Green roof": 2
-}
-window_type_dict = {
-    "Single glazing": 0,
-    "Double glazing": 1,
-    "Triple glazing": 2
-}
+st.header("🏗 Material Choices")
+wall_type = st.selectbox("Wall Type", ["Standard Wall", "High Performance Wall"])
+roof_type = st.selectbox("Roof Type", ["Standard Roof", "Green Roof"])
+window_type = st.selectbox("Window Type", ["Single Glazing", "Double Glazing"])
 
-wall_type_name = st.selectbox("Wall Type", list(wall_type_dict.keys()))
-roof_type_name = st.selectbox("Roof Type", list(roof_type_dict.keys()))
-window_type_name = st.selectbox("Window Type", list(window_type_dict.keys()))
 
-wall_type = wall_type_dict[wall_type_name]
-roof_type = roof_type_dict[roof_type_name]
-window_type = window_type_dict[window_type_name]
+st.header("💵 Energy Price")
+energy_price = st.number_input("Enter your local energy price (€/kWh)", min_value=0.05, max_value=1.00, value=0.20)
 
-st.header("Energy Price")
-energy_price = st.number_input("Energy Price (€/kWh)", value=0.20, step=0.01)
 
-if st.button("Predict Energy Loads & Costs"):
-    
-    input_data = [[relative_compactness, surface_area, wall_area,
-                   roof_area, overall_height, orientation,
-                   glazing_area, glazing_area_dist,
-                   wall_type, roof_type, window_type]]
+if st.button("Predict Energy Loads"):
+    #
+    wall_type_encoded = 1 if wall_type == "High Performance Wall" else 0
+    roof_type_encoded = 1 if roof_type == "Green Roof" else 0
+    window_type_encoded = 1 if window_type == "Double Glazing" else 0
 
-    
-    heating_load_per_m2 = heating_model.predict(input_data)[0]
-    cooling_load_per_m2 = cooling_model.predict(input_data)[0]
+    input_features = [[
+        relative_compactness, surface_area, wall_area, roof_area,
+        overall_height, orientation, glazing_area, glazing_area_distribution,
+        wall_type_encoded, roof_type_encoded, window_type_encoded
+    ]]
 
-   
-    floor_area = surface_area  
-    total_heating_energy = heating_load_per_m2 * floor_area
-    total_cooling_energy = cooling_load_per_m2 * floor_area
+  
+    predicted_heating_load = heating_model.predict(input_features)[0]
+    predicted_cooling_load = cooling_model.predict(input_features)[0]
+    total_energy_kwh = predicted_heating_load + predicted_cooling_load
+    total_cost = total_energy_kwh * energy_price
 
-    
-    heating_cost = total_heating_energy * energy_price
-    cooling_cost = total_cooling_energy * energy_price
-
-    
-    st.subheader("Predicted Energy Loads")
-    st.write(f"**Heating Load (per m²):** {heating_load_per_m2:.2f} kWh/m²")
-    st.write(f"**Cooling Load (per m²):** {cooling_load_per_m2:.2f} kWh/m²")
-
-    st.subheader("Total Annual Energy Use")
-    st.write(f"**Total Heating Energy:** {total_heating_energy:,.0f} kWh/year")
-    st.write(f"**Total Cooling Energy:** {total_cooling_energy:,.0f} kWh/year")
-
-    st.subheader("Estimated Annual Energy Costs")
-    st.write(f"**Heating Cost:** €{heating_cost:,.2f}/year")
-    st.write(f"**Cooling Cost:** €{cooling_cost:,.2f}/year")
-    st.write(f"**Total Energy Cost:** €{(heating_cost + cooling_cost):,.2f}/year")
+    s
+    st.success(f"🔥 **Predicted Heating Load:** {predicted_heating_load:.2f} kWh")
+    st.success(f"❄️ **Predicted Cooling Load:** {predicted_cooling_load:.2f} kWh")
+    st.info(f"💡 **Total Energy Consumption:** {total_energy_kwh:.2f} kWh")
+    st.info(f"💸 **Estimated Annual Cost:** €{total_cost:.2f}")
