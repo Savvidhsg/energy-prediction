@@ -79,6 +79,8 @@ R² Score: 0.91
 Mean Squared Error: 9.15
 
 The predictions from Linear Regression showed reasonable performance but missed some of the more intricate relationships between features and energy loads.
+
+
 ![image](https://github.com/user-attachments/assets/56ac2ab4-2a25-4287-ac40-b9997fef75e2)
 
 # Random Forest Results
@@ -86,7 +88,10 @@ The predictions from Linear Regression showed reasonable performance but missed 
 R² Score: 0.99
 
 Mean Squared Error: 0.24
+
+
 ![image](https://github.com/user-attachments/assets/7d9b9615-1678-4e79-b4bc-a0234a22d6e9)
+
 
 The difference in model performance highlights the importance of choosing algorithms that align with the underlying complexity of the data. While Linear Regression provides a good first approximation, Random Forest is better suited for datasets with multiple interacting variables and non-linear effects.
 
