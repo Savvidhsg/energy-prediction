@@ -1,3 +1,5 @@
+# Energy Efficiency Prediction Using Machine Learning
+
 This project explores how **Machine Learning (ML)** can assist engineers and architects in designing energy-efficient buildings. The focus is on predicting the **Heating Load (HL)** and **Cooling Load (CL)** of a building based on design parameters such as wall area, roof area, glazing area, and orientation.
 
 The dataset used is **simulated**, making it a useful sandbox for experimenting with ML techniques and understanding how different design features influence energy consumption. This is a simplified approach that focuses on key parameters, providing a conceptual demonstration rather than a detailed engineering-grade simulation.
@@ -44,6 +46,8 @@ Wall Area and Glazing Area showed positive correlations with energy loads, as la
 To better visualize these relationships, scatter plots were created for key features against both Heating Load and Cooling Load.
 
 ![image](https://github.com/user-attachments/assets/cf9f7003-7816-4451-8c8c-78954bec35cf)   ![image](https://github.com/user-attachments/assets/811bb3c3-8384-4738-8e72-f3f7cc05a201)
+
+** all the graphs are in ipynb file **
 
 
 
