@@ -47,7 +47,7 @@ To better visualize these relationships, scatter plots were created for key feat
 
 ![image](https://github.com/user-attachments/assets/cf9f7003-7816-4451-8c8c-78954bec35cf)   ![image](https://github.com/user-attachments/assets/811bb3c3-8384-4738-8e72-f3f7cc05a201)
 
-** all the graphs are in ipynb file **
+**all the graphs are in ipynb file**
 
 
 
