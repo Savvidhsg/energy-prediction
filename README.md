@@ -1,35 +1,35 @@
-This project explores how Machine Learning (ML) can assist engineers and architects in designing energy-efficient buildings. The focus is on predicting the Heating Load (HL) and Cooling Load (CL) of a building based on design parameters such as wall area, roof area, glazing area, and orientation.
+This project explores how **Machine Learning (ML)** can assist engineers and architects in designing energy-efficient buildings. The focus is on predicting the **Heating Load (HL)** and **Cooling Load (CL)** of a building based on design parameters such as wall area, roof area, glazing area, and orientation.
 
-The dataset used is simulated, making it a useful sandbox for experimenting with ML techniques and understanding how different design features influence energy consumption. This is a simplified approach that focuses on key parameters, providing a conceptual demonstration rather than a detailed engineering-grade simulation.
+The dataset used is **simulated**, making it a useful sandbox for experimenting with ML techniques and understanding how different design features influence energy consumption. This is a simplified approach that focuses on key parameters, providing a conceptual demonstration rather than a detailed engineering-grade simulation.
 
 The workflow covers the full process: exploring and analyzing the data, training models, comparing their performance, and building an interactive Streamlit web app for quick predictions. It’s intended as a practical example of applying ML to a real-world-inspired engineering problem.
 
 
 The dataset was obtained from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/energy+efficiency). It contains simulated data of various building designs and their respective heating and cooling energy requirements. Each row represents a building design with a combination of architectural features.Features
 
-The dataset includes eight input features:
+# The dataset includes eight input features:
 
-Relative Compactness: A measure of how compact the building is, influencing heat retention.
+* Relative Compactness: A measure of how compact the building is, influencing heat retention.
 
-Surface Area: Total external surface area of the building.
+* Surface Area: Total external surface area of the building.
 
-Wall Area: Total area of the building’s walls.
+* Wall Area: Total area of the building’s walls.
 
-Roof Area: Total area of the roof.
+* Roof Area: Total area of the roof.
 
-Overall Height: The height of the building.
+* Overall Height: The height of the building.
 
-Orientation: Cardinal orientation of the building (N, S, E, W).
+* Orientation: Cardinal orientation of the building (N, S, E, W).
 
-Glazing Area: Percentage of glazing on the building façade.
+* Glazing Area: Percentage of glazing on the building façade.
 
-Glazing Area Distribution: Distribution of glazing across the building façade.
+* Glazing Area Distribution: Distribution of glazing across the building façade.
 
-Targets
+# Targets
 
-Heating Load (HL): Energy required to heat the building.
+* Heating Load (HL): Energy required to heat the building.
 
-Cooling Load (CL): Energy required to cool the building.
+* Cooling Load (CL): Energy required to cool the building.
 
 The first step involved loading the dataset using pandas and performing an initial inspection with .head(), .info(), and .describe(). This allowed verification of the data’s structure, identification of feature ranges, and checking for missing values.
 
