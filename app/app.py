@@ -12,8 +12,8 @@ heating_model_path = os.path.join(model_folder, "heating_model.pkl")
 cooling_model_path = os.path.join(model_folder, "cooling_model.pkl")
 
 
-heating_model = joblib.load(heating_model_path)
-cooling_model = joblib.load(cooling_model_path)
+heating_model = joblib.load(os.path.join("models", "heating_model.pkl"))
+cooling_model = joblib.load(os.path.join("models", "cooling_model.pkl"))
 
 
 st.title("🏠 Building Energy Load Predictor")
