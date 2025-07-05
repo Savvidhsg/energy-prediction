@@ -2,7 +2,8 @@ import streamlit as st
 import joblib
 import os
 
-model_folder = os.path.join(os.path.dirname(__file__), "..", "models")
+model_folder = "models"
+
 
 heating_model_path = os.path.join(model_folder, "heating_model.pkl")
 cooling_model_path = os.path.join(model_folder, "cooling_model.pkl")
