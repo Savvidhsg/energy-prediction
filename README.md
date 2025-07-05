@@ -9,7 +9,7 @@ The workflow covers the full process: exploring and analyzing the data, training
 
 The dataset was obtained from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/energy+efficiency). It contains simulated data of various building designs and their respective heating and cooling energy requirements. Each row represents a building design with a combination of architectural features.Features
 
-# The dataset includes eight input features:
+## The dataset includes eight input features:
 
 * Relative Compactness: A measure of how compact the building is, influencing heat retention.
 
@@ -27,7 +27,7 @@ The dataset was obtained from the [UCI Machine Learning Repository](https://arch
 
 * Glazing Area Distribution: Distribution of glazing across the building façade.
 
-# Targets
+## Targets
 
 * Heating Load (HL): Energy required to heat the building.
 
@@ -67,7 +67,7 @@ The dataset was split into features (X) and target variables (y). Both Heating L
 
 The data was then split into training and testing sets using an 80-20 ratio. Standardization was applied where needed to ensure fair treatment of features, especially for models sensitive to scale.
 
-# Model Selection
+## Model Selection
 
 Two algorithms were tested to evaluate predictive performance:
 
@@ -77,7 +77,7 @@ Two algorithms were tested to evaluate predictive performance:
 
 Both models were trained on the training set and evaluated using metrics such as R² score and Mean Squared Error (MSE) on the test set.
 
-# Linear Regression Results
+## Linear Regression Results
 
 R² Score: 0.91
 
@@ -88,7 +88,7 @@ The predictions from Linear Regression showed reasonable performance but missed 
 
 ![image](https://github.com/user-attachments/assets/56ac2ab4-2a25-4287-ac40-b9997fef75e2)
 
-# Random Forest Results
+## Random Forest Results
 
 R² Score: 0.99
 
@@ -104,7 +104,7 @@ These results emphasize that ML can be a powerful tool in guiding design decisio
 
 Following the analysis of Heating Load, the same workflow was applied to predict Cooling Load. This involved:
 
-Random Forest Results (Cooling Load)
+## Random Forest Results (Cooling Load)
 
 R² Score: 0.97
 
