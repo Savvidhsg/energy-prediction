@@ -137,6 +137,9 @@ To provide additional context, the app includes a simple cost estimation module.
 # HOW TO RUN THE APP
 
 Click below to open the app directly in your browser:
+*available later*
+
+You can locally for now
 
 
 
